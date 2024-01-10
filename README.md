@@ -1,73 +1,47 @@
-## ⛩ **NodeJS Starter**
-
-### **`About this repository 😎`**
-This repository talks about how to build an outstanding web server using latest Javascript technologies that can help micro entrepreneurs swiftly reach economic freedom.
+## ⛩ **Google Spreadsheet Randomizer**
+This cool app you made uses Node.js to grab random stuff from your Google Sheets. Just toss in the sheet ID, and boom, it grabs random data like magic dice! It uses special tricks to make sure everything's fair and unpredictable, like a super-shuffler. So if you need random picks for quizzes, tasks, or anything fun, this app's your new best friend! It's like sprinkling randomness on your boring data, making things exciting and fair again.
 
 ### **`Engine Requirement 🚜`**
 ```
-  -- Node.js v16.x or v18.x
+  -- Node.js v18.x or v20.x
   -- NPM v8+
 ```
 
-### **`Technology Stacks 🍔`**
-```
-  -- Node.js
-  -- Koa.js (Express.js Godfather) 🔥🔥
-  -- Morgan (for logging purposes)
-  -- Mongodb 💾
-```
-
-### **`Project Structures 🏢`**
-```
-.
-│── README.md
-│── .env.example  (this will be the environment file)
-|── .gitignore
-|── package.json
-|── index.js     (entry point)
-└── controllers/
-|   └── ...[.js]
-└── helpers/
-|   └── ...[.js]
-└── libraries/
-|   └── ...[.js]
-└── middlewares/
-|   └── ...[.js]
-└── repositories/
-|   └── ...[.js]
-└── routes/
-|   └── ...[.js]
-└── services/
-|   └── ...[.js] (db connection or third party api)
-```
-
 ### **`Install Localy 🧑🏼‍🔧`**
-1. install dependency. `npm install`  
-1. copy .env.example and rename it into .env (`cp .env.example .env`)
-1. ajust config in .env
+1. `npm install`  
+1. rename `.env.example` into `.env` (`cp .env.example .env`)
+1. `npm start`
 
-### **`Running App 👟`**
-`npm start`  
+### **`Using API`**
+```sh
+curl http://localhost:3000/api/random?sheet_id=1ccc0UszBM6NUnuV_w8C_4NHAQO3uvqJ6JodPeYJzDhc
+```
+```json
+ {
+   "success": true,
+   "message": "success",
+   "validation": {
+   
+   },
+   "data": {
+     "document": {
+       "spreadsheet_id": "1ccc0UszBM6NUnuV_w8C_4NHAQO3uvqJ6JodPeYJzDhc",
+       "title": "Testing Public",
+       "sheet": "Sheet1",
+       "total": 26
+     },
+     "random": {
+       "random_number": 4,
+       "timestamp": "1/22/2018 16:51:36",
+       "name": "John Doe",
+       "email": "someone@gmail.com",
+       "phone": "0842194214175"
+     }
+   }
+ }
+```
 
-### **`Flow Development 🏗`**
-During the development cycle, a variety of supporting branches are used:  
-
-- feature/* -- feature branches are used to develop new features for the upcoming releases. May branch off from develop and must merge into develop.
-- hotfix/* -- hotfix branches are necessary to act immediately upon an undesired status of master. May branch off from master and must merge into master and develop.
-
-Creating a new feature  
-
-1. create new branch from master. ex: `feature/name-of-feature`.
-1. write your code.
-1. don't forget to run `npm run lint` to check standardize code or `npm run lintfix` to auto fix non-standard code.
-1. commit & push your work to the same named branch on the server.
-1. create PR into development branch for testing in dev server.
-1. if its pre-production ready then create PR from the same branch into staging. **DON'T PR FROM DEVELOPMENT BRANCH!**
-1. if ready to production then create PR from the same branch into master/production. **DON'T PR FROM DEVELOPMENT BRANCH OR STAGING!**
-
-### **`Deployment 🚀`**
-This flow of deployment using Git Flow with 3 main branches  
-
-- master -- this branch contains production code. All development code is merged into master in sometime.
-- staging -- this branch is a nearly exact replica of a production environment for software testing.
-- development/dev -- this branch contains pre-production code. When the features are finished then they are merged into develop.
+ps: You can specify sheet name
+```sh
+curl http://localhost:3000/api/random?sheet_id=1ccc0UszBM6NUnuV_w8C_4NHAQO3uvqJ6JodPeYJzDhc&sheet_name=customsheetname
+```

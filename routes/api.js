@@ -1,6 +1,7 @@
 const Router = require('koa-router')
 const router = new Router()
+const spreadsheetController = require('../controllers/spreadsheet.controller')
 
-// router.get('/detail', require('../controllers/userController').detail)
+router.get('/random', spreadsheetController.randomDataGet)
 
 module.exports = router

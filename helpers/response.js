@@ -1,6 +1,6 @@
 const successResponse = (data, message = 'success') => {
   const response = {
-    status: 200,
+    success: true,
     message,
     validation: {},
     data
@@ -9,9 +9,9 @@ const successResponse = (data, message = 'success') => {
   return response
 }
 
-const errorResponse = (status, message, validationErrors = {}) => {
+const errorResponse = (message, validationErrors = {}) => {
   const response = {
-    status,
+    success: false,
     message,
     validation: validationErrors,
     data: {}
@@ -21,7 +21,7 @@ const errorResponse = (status, message, validationErrors = {}) => {
 }
 
 const errorValidation = (validationErrors = {}, message = 'failed') => {
-  return errorResponse(400, message, validationErrors)
+  return errorResponse(message, validationErrors)
 }
 
 module.exports = {

@@ -5,7 +5,6 @@ const BodyParser = require('koa-bodyparser')
 const Helmet = require('koa-helmet')
 const Cors = require('@koa/cors')
 const Respond = require('koa-respond')
-const morgan = require('koa-morgan')
 
 // Middlewares
 const Middlewares = require('./middlewares')
@@ -21,9 +20,6 @@ const app = new Koa()
 ;(async () => {
   // middleware for handling error
   app.use(Middlewares.middlewareErrorWrapper)
-  if (['dev', 'development'].includes(process.env.NODE_ENV)) {
-    app.use(morgan('combined'))
-  }
 
   app.use(Helmet())
 
@@ -65,9 +61,9 @@ const app = new Koa()
 
   // error handling
   app.on('error', (err, ctx) => {
-    ctx.status = ctx.status === 404 ? 500 : ctx.status
+    ctx.status = 500
     ctx.body = {
-      status: ctx.status,
+      success: false,
       message: err.message ?? 'Something went wrong',
       validation: {},
       data: {}

@@ -1,30 +1,23 @@
-// const mongoService = require('../services/mongo')
-// const mysqlService = require('../services/mysql')
-
-// const util = require('util')
-// const UserRepo = require('./user')
-
 /**
  * @typedef {Object} ContextRepo
  * @property {ListRepo} repo
  *
  * @typedef {Object} ListRepo
- * @property {UserRepo} user
+ * @property {String} googleApiKey
  */
 
 /**
  * @param {import('koa').BaseContext} appContext
  */
 module.exports = async (appContext = {}) => {
-  // mongodb
-  // const mongoConnDB = await mongoService()
-
-  // mysql
-  // const mysqlConnection = await mysqlService()
-  // promisify mysql query
-  // const query = util.promisify(mysqlConnection.query).bind(mysqlConnection)
+  // google api key
+  const gApiKey = process.env.GOOGLE_API_KEY ?? ''
+  if (!gApiKey) {
+    console.error('GOOGLE_API_KEY is required')
+    process.exit(0)
+  }
 
   appContext.repo = {
-    // user: new UserRepo(mongoConnDB)
+    googleApiKey: gApiKey
   }
 }
